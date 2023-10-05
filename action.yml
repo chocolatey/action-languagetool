@@ -37,6 +37,9 @@ inputs:
   custom_api_endpoint:
     description: 'Custom API endpoint of LanguageTool server. e.g. https://languagetool.org/api'
     default: ''
+  base_ref:
+    description: 'The branch or commit reference that files changed or added should be collected from. Will use the default branch if coming from a pull request if not set.'
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'

@@ -27,6 +27,20 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
           level: info
+  test-pr-change-check:
+    if: github.event_name == 'pull_request'
+    name: runner / languagetool (github-pr-check) (Changed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-check
+          level: info
+          base_ref: develop
 
   test-pr-review:
     if: github.event_name == 'pull_request'
