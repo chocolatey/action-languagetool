@@ -36,7 +36,11 @@ fi
 
 # Disable glob to handle glob patterns with ghglob command instead of with shell.
 set -o noglob
-FILES="$(git ls-files | ghglob ${INPUT_PATTERNS})"
+if [ -n "${INPUT_BASE_REF}" ]; then
+  FILES="$(git diff "origin/${INPUT_BASE_REF}" --name-only | ghglob "${INPUT_PATTERNS}")"
+else
+  FILES="$(git ls-files | ghglob "${INPUT_PATTERNS}")"
+fi
 set +o noglob
 
 # To manage whitespaces in filepath
